@@ -1,0 +1,26 @@
+class:: PLL
+summary:: A phase-locked loop
+related:: TODO
+categories:: UGens>TODO
+
+description::
+
+A phase-locked loop
+
+
+classmethods::
+
+method::ar, kr
+
+argument::TODO
+
+argument::TODO
+
+
+examples::
+
+code::
+
+{ PLL.ar(/* TODO */) }.play
+
+::
