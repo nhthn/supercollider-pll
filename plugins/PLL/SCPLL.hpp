@@ -3,22 +3,20 @@
 
 #pragma once
 
+#include <memory>
 #include "SC_PlugIn.hpp"
+#include "PLL.hpp"
 
 namespace SCPLL {
 
-class PLL : public SCUnit {
+class SCPLL : public SCUnit {
 public:
-    PLL();
-
-    // Destructor
-    // ~PLL();
+    SCPLL();
 
 private:
-    // Calc function
     void next(int nSamples);
 
-    // Member variables
+    std::unique_ptr<PLL> mCore;
 };
 
 } // namespace SCPLL

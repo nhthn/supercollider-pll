@@ -64,9 +64,11 @@ endif()
 ####################################################################################################
 # Begin target PLL
 
+include_directories(pll)
+
 set(PLL_cpp_files
-    plugins/PLL/PLL.hpp
-    plugins/PLL/PLL.cpp
+    plugins/PLL/SCPLL.hpp
+    plugins/PLL/SCPLL.cpp
 )
 set(PLL_sc_files
     plugins/PLL/PLL.sc
