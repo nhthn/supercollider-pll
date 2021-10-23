@@ -17,7 +17,7 @@ SCPLL::SCPLL() {
 void SCPLL::next(int nSamples) {
     const float* inBuf = in(0);
     int intAlgorithm = in0(1);
-    float k = in0(2);
+    float lag = in0(2);
     float centerFrequency = in0(3);
     float frequencyGain = in0(4);
     float* outBuf = out(0);
@@ -35,7 +35,7 @@ void SCPLL::next(int nSamples) {
     }
 
     mCore->setPhaseDetectorAlgorithm(algorithm);
-    mCore->setLPFK(k);
+    mCore->setLag(lag);
     mCore->setVCOCenterFrequency(centerFrequency);
     mCore->setVCOFrequencyGain(frequencyGain);
 

@@ -1,0 +1,75 @@
+class:: PLL
+summary:: A phase-locked loop implementation
+related:: TODO
+categories:: UGens>TODO
+
+description::
+
+A phase-locked loop attempts to grab on to the fundamental frequency of an oscillatory signal and produce an oscillation that is synchronized in frequency and phase. On polyphonic signals, PLLs produce heavy distortion. PLLs see heavy use in telecommunications and niche appeal in guitar pedals, and the latter inspired this UGen.
+
+No antialiasing at all in this one!
+
+classmethods::
+
+method::ar
+
+All parameters except code:: in :: are control rate only.
+
+argument::in
+
+argument::algorithm
+
+Selects which phase detection algorithm to use. 0 is a multiplier, 1 is a JK-flipflop, and 2 is a Phase Frequency Detector (PFD). These are in roughly increasing order of accuracy. This can be modulated.
+
+argument::lag
+
+The 1/e decay time in seconds of the internal one-pole LPF. Higher lag times result in smoother frequency signals, while lower lag times will track the input signal more immediately. Lag times of 0.01s or less tend to be best for distortion effects.
+
+argument::centerFreq
+
+The center frequency of the internal VCO in Hz. The PLL will function accurately around this frequency given a well-behaved input signal.
+
+argument::freqGain
+
+The amount that the internal frequency signal modulates the VCO in Hz. This roughly defines the frequency range where the PLL can operate, but ultimately it depends on the phase detector algorithm and the input signal.
+
+
+examples::
+
+code::
+
+{ PLL.ar(SinOsc.ar(MouseY.kr(100, 1000, 1)), algorithm: 2, lag: 0.1, freqGain: 1000) * 0.1 ! 2 }.play
+
+(
+{
+	var snd;
+	snd = (Saw.ar(100 * [1, 1.5, 2]) * LFNoise2.kr(3 ! 3)).sum;
+	snd * 0.3 ! 2;
+}.play
+)
+
+(
+{
+	var snd;
+	snd = (Saw.ar(100 * [1, 1.5, 2]) * LFNoise2.kr(3 ! 3)).sum;
+	PLL.ar(snd, algorithm: 0, lag: 0.01, centerFreq: 440, freqGain: 1000) * 0.3 ! 2
+}.play
+)
+
+(
+{
+	var snd;
+	snd = (Saw.ar(100 * [1, 1.5, 2]) * LFNoise2.kr(3 ! 3)).sum;
+	PLL.ar(snd, algorithm: 1, lag: 0.01, centerFreq: 440, freqGain: 1000) * 0.3 ! 2
+}.play
+)
+
+(
+{
+	var snd;
+	snd = (Saw.ar(100 * [1, 1.5, 2]) * LFNoise2.kr(3 ! 3)).sum;
+	PLL.ar(snd, algorithm: 2, lag: 0.01, centerFreq: 440, freqGain: 1000) * 0.3 ! 2
+}.play
+)
+
+::

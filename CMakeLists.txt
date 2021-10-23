@@ -74,7 +74,7 @@ set(PLL_sc_files
     plugins/PLL/PLL.sc
 )
 set(PLL_schelp_files
-    plugins/PLL/PLL.schelp
+    HelpSource/Classes/PLL.schelp
 )
 
 sc_add_server_plugin(
